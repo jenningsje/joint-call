@@ -7,7 +7,7 @@ as .fasta.fai and .dict. It is recommended that you use the Homo_sapiens_assembl
 
 # Configuation:
 
-IMPORTANT: First specify your email address within variant.lsf within the field <your-email-address> or the pipeline will fail.
+IMPORTANT: First specify your email address within variant.lsf within the field "<your-email-address>" or the pipeline will fail.
 
 In order to configure the pipeline run the following commands below:
 
