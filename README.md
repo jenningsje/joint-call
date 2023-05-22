@@ -1,4 +1,4 @@
-# joint-call
+# Joint-Call
 
 This package is used to joint call all the Genotype data for cancer patients for a family of your choice in order to find all the variants responsible for cancer. It is intended to work on a HPCC cluster that runs singularity and slurm so make sure that singularity is installed. 
 
