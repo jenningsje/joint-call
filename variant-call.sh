@@ -1,3 +1,3 @@
 #!/bin/bash
 
-bsub < gatk-pipeline.lsf
+bsub < variant-call.lsf
