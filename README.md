@@ -15,7 +15,7 @@ chmod u+x ./config-gatk-pipeline.sh
 
 config-gatk-pipeline.sh
 
-# Run the Entire pipeline:
+# Run the entire pipeline:
 
 Afterwards run the entire pipeline in the folder for which you have genotype data for the cancer patients within your HPCC Cluster with the following command below:
 
@@ -23,4 +23,10 @@ chmod u+x variant-call.sh
 
 ./variant-call.sh
 
-You will find all the Genotype data responsible for cancer after the HPCC has finished running the program.
+You will find all the Genotype data responsible for cancer after the HPCC cluster has finished running the program. This entire pipeline will run in the background after you have executed the commands above under "# Run the entire pipeline" until it is finished running.
+
+# Check status of job:
+
+to check the status of your job run the following command in your terminal:
+
+top
