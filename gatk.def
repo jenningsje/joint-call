@@ -1,0 +1,47 @@
+Bootstrap: library
+From: ubuntu:18.04
+
+%setup
+        touch /file1
+
+%files
+        /file1
+         /opt
+
+%post
+        apt-get update && apt-get install -y \
+        git-all \
+        python2.7 \
+        python3.6 \
+        curl \
+        openjdk-8-jdk \
+        wget
+
+        # Install git-lfs
+        curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
+        apt-get update && apt-get install -y git-lfs
+
+        # Clone repositories
+        git clone https://github.com/gradle/gradle
+
+        # Set up git-lfs
+        git lfs install
+        git lfs track "*.bam"
+        git add .gitattributes
+
+        # Change to gatk_package directory
+        cd gatk
+        ./gradlew bundle
+        cd ../gatk_package
+        # Install SLURM
+        wget -O slurm_install.sh https://www.ni-sp.com/wp-content/uploads/2019/10/SLURM_Ubuntu_installation.sh
+        chmod +x slurm_install.sh
+        ./slurm_install.sh
+
+
+%environment
+        # Set environment variables
+        export PATH="/opt:$PATH"
+        export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+        export TILEDB_DISABLE_FILE_LOCKING=1
+        export VER=21.08.6 # Set the desired version
