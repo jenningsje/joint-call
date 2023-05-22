@@ -1,12 +1,12 @@
-#SBATCH -W 1:00
-#SBATCH -o ./joint-call
-#SBATCH -cwd ./joint-call
-#SBATCH -q short
-#SBATCH -n 12
-#SBATCH -M 17
-#SBATCH -R rusage[mem=17]
-#SBATCH -u <your-email-address>
-#SBATCH -J variant-call-family
+#BSUB -W 1:00
+#BSUB -o <path/to/my/logs>
+#BSUB -cwd <path/to/my/working/directory>
+#BSUB -q short
+#BSUB -n 12
+#BSUB -M 17
+#BSUB -R rusage[mem=17]
+#BSUB -u <your-email-address>
+#BSUB -J variant-call-family
 
 for FILE in *.bam; do
         while ["$(jobs -p | wc -l)" -ge "SLURM_NTASKS"]; do
