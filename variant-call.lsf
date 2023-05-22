@@ -1,0 +1,32 @@
+#SBATCH -W 1:00
+#SBATCH -o /rsrch6/home/genomic_med/jejennings
+#SBATCH -cwd /rsrch6/home/genomic_med/jejennings
+#SBATCH -q short
+#SBATCH -n 12
+#SBATCH -M 17
+#SBATCH -R rusage[mem=17]
+#SBATCH -u JEJennings@mdanderson.org
+#SBATCH -J haplotype-call-father
+
+for FILE in *.bam; do
+        while ["$(jobs -p | wc -l)" -ge "SLURM_NTASKS"]; do
+                sleep 30
+        done
+
+        singularity exec gatk.sif_latest.sif --java-options "-Djava.io.tmpdir=/tmp/$SLURM_JOBID -Xms20G -Xmx20G -XX:ParallelGCThreads=2" HaplotypeCaller \
+                -R /rsrch6/home/genomic_med/jejennings/vcfs/platypus/Homo_sapiens_assembly19.fasta \
+                -I /rsrch6/home/genomic_med/jejennings/vcfs/platypus/VLewis-Osteosarcoma-NA-Lewis-01-PA14-1067-dad-s-N_160502_0386_0329_0330_0275_0276_0344_MERGE_MERGE-CGTACTAGTAGATCGC.wa_recalibed.bam \
+                -O /rsrch6/home/genomic_med/jejennings/vcfs/platypus/VLewis-Osteosarcoma-NA-Lewis-01-PA14-1067-dad-s-N_160502_0386_0329_0330_0275_0276_0344_MERGE_MERGE-CGTACTAGTAGATCGC.wa_recalibed.bam
+
+        singularity exec gatk.sif_latest.sif --java-options "-Djava.io.tmpdir=/tmp/$SLURM_JOBID -Xms20G -Xmx20G -XX:ParallelGCThreads=2" HaplotypeCaller \
+                -R Homo_sapiens_assembly19.fasta \
+                -I $FILE \
+                -O "${FILE%.bam}.g.vcf";
+
+        singularity exec gatk.sif_latest.sif --java-options "-Djava.io.tmpdir=/tmp/$SLURM_JOBID -Xms20G -Xmx20G -XX:ParallelGCThreads=2" GenotypeGVCFs \
+                -R data/ref/ref.fasta \
+                -V gendb://my_database \
+                -O output.g.vcf
+
+done
+wait
