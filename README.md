@@ -7,6 +7,8 @@ as .fasta.fai and .dict. It is recommended that you use the Homo_sapiens_assembl
 
 # Configuation:
 
+First specify your email address within the lsf file:
+
 In order to configure the pipeline run the following commands below:
 
 chmod u+x ./config-gatk-pipeline.sh
