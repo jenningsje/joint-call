@@ -1,6 +1,6 @@
 #SBATCH -W 1:00
-#SBATCH -o /rsrch6/home/genomic_med/jejennings
-#SBATCH -cwd /rsrch6/home/genomic_med/jejennings
+#SBATCH -o ./joint-call
+#SBATCH -cwd ./joint-call
 #SBATCH -q short
 #SBATCH -n 12
 #SBATCH -M 17
