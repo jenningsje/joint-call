@@ -21,3 +21,7 @@ Afterwards run the entire pipeline in the folder for which you have genotype dat
 chmod u+x variant-call.sh
 
 ./variant-call.sh
+
+You will find all the Genotype data responsible for cancer after the HPCC has finished running the program.
+
+Enjoy!
